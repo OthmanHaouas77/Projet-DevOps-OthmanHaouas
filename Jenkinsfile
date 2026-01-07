@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/USERNAME/Projet-DevOps-OthmanHaouas.git'
+                    url: 'https://github.com/OthmanHaouas77/Projet-DevOps-OthmanHaouas.git'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Deploy') {
             when {
-                success()
+                expression { currentBuild.currentResult == 'SUCCESS' }
             }
             steps {
                 echo 'Application deployed successfully'
