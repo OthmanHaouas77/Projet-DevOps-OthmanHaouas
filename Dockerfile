@@ -11,7 +11,7 @@ WORKDIR /app/devops-app
 RUN mvn -B dependency:go-offline
 
 # Copier le code source
-COPY bonjour-devops/src src
+COPY devops-app/src src
 
 # Build Maven
 RUN mvn -B clean package
