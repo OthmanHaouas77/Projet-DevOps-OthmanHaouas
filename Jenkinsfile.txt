@@ -1,13 +1,10 @@
 pipeline {
-    agent {
-        docker { image 'maven:3.8.8-openjdk-17' }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'dev',
-                    url: 'https://github.com/OthmanHaouas77/Projet-DevOps-OthmanHaouas.git'
+                git branch: 'main', url: 'https://github.com/USERNAME/Projet-DevOps-OthmanHaouas.git'
             }
         }
 
@@ -25,11 +22,20 @@ pipeline {
 
         stage('Deploy') {
             when {
-                expression { currentBuild.currentResult == 'SUCCESS' }
+                success()
             }
             steps {
-                echo 'Application deployed successfully'
+                echo 'Déploiement réussi'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline réussi'
+        }
+        failure {
+            echo 'Pipeline échoué'
         }
     }
 }
